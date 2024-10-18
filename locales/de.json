@@ -1,0 +1,11 @@
+{
+  "enter_email": "Geben Sie Ihre E-Mail-Adresse ein",
+  "email": "E-Mail",
+  "password": "Passwort",
+  "login": "Anmelden",
+  "forgot_password": "Passwort vergessen?",
+  "sign_up": "Registrieren",
+  "no_account": "Kein Konto?",
+  "login_failed": "Die Anmeldeinformationen sind falsch. \nBitte überprüfen Sie Ihre E-Mail-Adresse und Ihr Passwort.",
+  "login_failed_server": "Wir haben technische Schwierigkeiten. \nBitte versuchen Sie es später noch einmal"
+}

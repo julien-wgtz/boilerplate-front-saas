@@ -1,0 +1,11 @@
+{
+  "enter_email": "Entrez votre email",
+  "email": "Email",
+  "password": "Mot de passe",
+  "login": "Connexion",
+  "forgot_password": "Mot de passe oublié ?",
+  "sign_up": "S'inscrire",
+  "no_account": "Pas de compte ?",
+  "login_failed": "Les informations de connexion sont incorrectes. Veuillez vérifier votre email et mot de passe.",
+  "login_failed_server": "Nous rencontrons des difficultés techniques. Merci de réessayer ultérieurement"
+}

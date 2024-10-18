@@ -1,39 +1,35 @@
-import { NextResponse } from "next/server";
- 
-let locales = ['fr', 'en']
- 
-// Get the preferred locale, similar to the above or using a library
-function getLocale(request: Request) { 
-	const acceptLanguage = request.headers.get('Accept-Language')
-  const locale = acceptLanguage ? acceptLanguage.split(',')[0].split('-')[0] : 'fr';
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 
-	return locales.includes(locale) ? locale : 'fr'
- }
- 
-export function middleware(request: Request & { nextUrl: URL }) {
-  // Check if there is any supported locale in the pathname
-  const pathname = new URL(request.url).pathname;
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
- 
-  console.log('pathnameHasLocale', pathnameHasLocale)
-  if (pathnameHasLocale) return
- 
-  // Redirect if there is no locale
-  const locale = getLocale(request)
-  console.log('locale', locale)
-  request.nextUrl.pathname = `/${locale}${pathname}`
-  // e.g. incoming request is /products
-  // The new URL is now /en-US/products
-  return NextResponse.redirect(request.nextUrl)
+// Configuration des locales supportées
+const locales = ['de', 'en', 'fr']; // Langues disponibles
+const defaultLocale = 'fr'; // Langue par défaut si aucune locale n'est présente
+
+// Créer le middleware avec next-intl
+const intlMiddleware = createMiddleware({
+  locales,  // Langues supportées
+  defaultLocale,  // Langue par défaut
+});
+
+// Middleware personnalisé pour redirection
+export default function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+
+  // Vérifie si l'URL contient déjà une locale
+  const pathLocale = pathname.split('/')[1];
+
+  if (!locales.includes(pathLocale)) {
+    // Si la locale n'est pas dans l'URL, redirige vers la langue par défaut
+    return NextResponse.redirect(new URL(`/${defaultLocale}${pathname}`, request.url));
+  }
+
+  // Sinon, continue avec le middleware next-intl
+  return intlMiddleware(request);
 }
- 
+
+// Configurer le matcher pour appliquer ce middleware uniquement aux routes pertinentes
 export const config = {
-  matcher: [
-    // Skip all internal paths (_next)
-    '/((?!_next).*)',
-    // Optional: only run on root (/) URL
-    // '/'
-  ],
-}
+  matcher: ['/((?!_next|api|static|favicon.ico).*)'],  // Appliquer à toutes les routes sauf celles spécifiques
+};
+

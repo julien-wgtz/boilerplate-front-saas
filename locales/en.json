@@ -1,0 +1,11 @@
+{
+  "enter_email": "Enter your email",
+  "email": "Email",
+  "password": "Password",
+  "login": "Login",
+  "forgot_password": "Forgot password?",
+  "sign_up": "Sign up",
+  "no_account": "No account?",
+  "login_failed": "The login information is incorrect. \nPlease check your email and password.",
+  "login_failed_server": "We are experiencing technical difficulties. \nPlease try again later"
+}
