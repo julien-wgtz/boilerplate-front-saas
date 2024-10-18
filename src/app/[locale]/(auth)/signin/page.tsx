@@ -9,12 +9,14 @@ import UserService from "../../../../services/users";
 import { useTranslations } from "next-intl";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useRouter } from 'next/navigation';
+import useUserStore from "@/stores/userStore";
 
 const SignInPage = ({ params }: { params: { locale: string } }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [msgError, setMsgError] = useState("");
   const [loading, setLoading] = useState(false);
+  const setUser = useUserStore((state) => state.setUser);
   const router = useRouter();
   const t = useTranslations();
 
@@ -27,6 +29,8 @@ const SignInPage = ({ params }: { params: { locale: string } }) => {
       if(data.statusCode == 401) {
         setMsgError(t("login_failed"));
       } else {
+        setUser(data);
+        console.log(data)
         router.push(`/${params.locale}/dashboard`);
       }
     } catch (error) {
