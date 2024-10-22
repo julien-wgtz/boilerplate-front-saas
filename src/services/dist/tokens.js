@@ -36,18 +36,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var UserService = /** @class */ (function () {
-    function UserService() {
+var TokenServices = /** @class */ (function () {
+    function TokenServices() {
     }
-    UserService.login = function (credentials) {
+    TokenServices.validateToken = function (token, type) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/auth/login", {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/tokens/validate", {
                             method: 'POST',
-                            body: JSON.stringify(credentials),
-                            credentials: 'include',
+                            body: JSON.stringify({ token: token, type: type }),
                             headers: { 'Content-Type': 'application/json' }
                         })];
                     case 1:
@@ -58,63 +57,6 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.me = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var response, data;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/me", {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            credentials: 'include'
-                        })];
-                    case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 2:
-                        data = _a.sent();
-                        console.log(data); // Log the response data
-                        return [2 /*return*/, data];
-                }
-            });
-        });
-    };
-    UserService.resetPassword = function (email) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/reset-password", {
-                            method: 'POST',
-                            body: JSON.stringify({ email: email }),
-                            headers: { 'Content-Type': 'application/json' }
-                        })];
-                    case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 2: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    UserService.changePassword = function (password, token) {
-        return __awaiter(this, void 0, void 0, function () {
-            var response;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-password-token", {
-                            method: 'POST',
-                            body: JSON.stringify({ password: password, token: token }),
-                            headers: { 'Content-Type': 'application/json' }
-                        })];
-                    case 1:
-                        response = _a.sent();
-                        return [4 /*yield*/, response.json()];
-                    case 2: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    return UserService;
+    return TokenServices;
 }());
-exports["default"] = UserService;
+exports["default"] = TokenServices;

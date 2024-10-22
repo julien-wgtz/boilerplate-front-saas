@@ -7,5 +7,17 @@
   "sign_up": "Sign up",
   "no_account": "No account?",
   "login_failed": "The login information is incorrect. \nPlease check your email and password.",
-  "login_failed_server": "We are experiencing technical difficulties. \nPlease try again later"
+  "login_failed_server": "We are experiencing technical difficulties. \nPlease try again later",
+  "description_forgot_password": "No worries, we'll send you the reset instructions.",
+  "password_forgot": "Forgotten password?",
+  "reset_password": "Reset Password",
+  "back_to_login": "Return to login page",
+  "email_sent": "Email sent",
+  "email_sent_description": "If an account is associated with this email, you will receive a link to reset your password.",
+  "invalid_link": "Invalid reset link",
+  "invalid_link_description": "This password reset link has expired or is invalid. \nPlease request a new link.",
+  "reset_password_link": "Reset your password",
+  "reset_password_desc": "Please enter a new password for your account.",
+  "email_confirm": "Confirm password",
+  "passwords_do_not_match": "The passwords do not match."
 }

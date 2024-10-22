@@ -7,5 +7,18 @@
   "sign_up": "Registrieren",
   "no_account": "Kein Konto?",
   "login_failed": "Die Anmeldeinformationen sind falsch. \nBitte überprüfen Sie Ihre E-Mail-Adresse und Ihr Passwort.",
-  "login_failed_server": "Wir haben technische Schwierigkeiten. \nBitte versuchen Sie es später noch einmal"
+  "login_failed_server": "Wir haben technische Schwierigkeiten. \nBitte versuchen Sie es später noch einmal",
+  "description_forgot_password": "Keine Sorge, wir senden Ihnen die Anweisungen zum Zurücksetzen.",
+  "password_forgot": "Passwort vergessen?",
+  "reset_password": "Passwort zurücksetzen",
+  "back_to_login": "Zurück zur Anmeldeseite",
+  "email_sent": "E-Mail gesendet",
+  "email_sent_description": "Wenn mit dieser E-Mail ein Konto verknüpft ist, erhalten Sie einen Link zum Zurücksetzen Ihres Passworts.",
+  "invalid_link": "Ungültiger Link zum Zurücksetzen",
+  "invalid_link_description": "Dieser Link zum Zurücksetzen des Passworts ist abgelaufen oder ungültig. \nBitte fordern Sie einen neuen Link an.",
+  "reset_password_link": "Setzen Sie Ihr Passwort zurück",
+  "reset_password_desc": "Bitte geben Sie ein neues Passwort für Ihr Konto ein.",
+  "email_confirm": "Passwort bestätigen",
+  "passwords_do_not_match": "Die Passwörter stimmen nicht überein.",
+  "error_occurred": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
 }

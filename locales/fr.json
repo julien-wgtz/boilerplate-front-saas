@@ -7,5 +7,18 @@
   "sign_up": "S'inscrire",
   "no_account": "Pas de compte ?",
   "login_failed": "Les informations de connexion sont incorrectes. Veuillez vérifier votre email et mot de passe.",
-  "login_failed_server": "Nous rencontrons des difficultés techniques. Merci de réessayer ultérieurement"
+  "login_failed_server": "Nous rencontrons des difficultés techniques. Merci de réessayer ultérieurement",
+  "description_forgot_password": "Pas de souci, nous vous enverrons les instructions de réinitialisation.",
+  "password_forgot": "Mot de passe oublié ?",
+  "reset_password": "Réinitialiser le mot de passe",
+  "back_to_login": "Retour à la page de connexion",
+  "email_sent": "Email envoyé",
+  "email_sent_description": "Si un compte est associé à cet email, vous recevrez un lien pour réinitialiser votre mot de passe.",
+  "invalid_link": "Lien de réinitialisation invalide",
+  "invalid_link_description": "Ce lien de réinitialisation de mot de passe a expiré ou est invalide. Veuillez demander un nouveau lien.",
+  "reset_password_link": "Réinitialiser votre mot de passe",
+  "reset_password_desc": "Veuillez entrer un nouveau mot de passe pour votre compte.",
+  "email_confirm": "Confirmez le mot de passe",
+  "passwords_do_not_match": "Les mots de passe ne correspondent pas.",
+  "error_occurred": "Une erreur est survenue. Veuillez réessayer."
 }
