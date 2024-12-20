@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -31,11 +32,14 @@ async function RootLayout({
   return (
     <html lang={params.locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-sidebar`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider
+          messages={messages}
+        >
           {children}
         </NextIntlClientProvider>
+        <Toaster />
       </body>
     </html>
   );

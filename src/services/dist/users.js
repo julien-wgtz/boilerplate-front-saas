@@ -39,16 +39,18 @@ exports.__esModule = true;
 var UserService = /** @class */ (function () {
     function UserService() {
     }
-    UserService.login = function (credentials) {
+    UserService.signup = function (credentials) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/auth/login", {
-                            method: 'POST',
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/auth/register", {
+                            method: "POST",
                             body: JSON.stringify(credentials),
-                            credentials: 'include',
-                            headers: { 'Content-Type': 'application/json' }
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
                         })];
                     case 1:
                         response = _a.sent();
@@ -58,22 +60,116 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.me = function () {
+    UserService.login = function (credentials) {
         return __awaiter(this, void 0, void 0, function () {
-            var response, data;
+            var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/me", {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            credentials: 'include'
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/auth/login", {
+                            method: "POST",
+                            body: JSON.stringify(credentials),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
                         })];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];
-                    case 2:
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.logout = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/auth/logout", {
+                            method: "POST",
+                            credentials: "include"
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.askChangeEmail = function (email) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/ask-change-email", {
+                            method: "POST",
+                            body: JSON.stringify({ email: email }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.updateEmail = function (token) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-email", {
+                            method: "POST",
+                            body: JSON.stringify({ token: token }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.me = function (cookie) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response, data;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!!cookie) return [3 /*break*/, 2];
+                        return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/me", {
+                                method: "POST",
+                                credentials: "include",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                }
+                            })];
+                    case 1:
+                        response = _a.sent();
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/me", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Cookie: "connect.sid=" + cookie.value
+                            }
+                        })];
+                    case 3:
+                        response = _a.sent();
+                        _a.label = 4;
+                    case 4: return [4 /*yield*/, response.json()];
+                    case 5:
                         data = _a.sent();
-                        console.log(data); // Log the response data
                         return [2 /*return*/, data];
                 }
             });
@@ -85,9 +181,11 @@ var UserService = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/reset-password", {
-                            method: 'POST',
+                            method: "POST",
                             body: JSON.stringify({ email: email }),
-                            headers: { 'Content-Type': 'application/json' }
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
                         })];
                     case 1:
                         response = _a.sent();
@@ -97,16 +195,168 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.changePassword = function (password, token) {
+    UserService.changePasswordToken = function (password, token) {
         return __awaiter(this, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-password-token", {
-                            method: 'POST',
+                            method: "POST",
                             body: JSON.stringify({ password: password, token: token }),
-                            headers: { 'Content-Type': 'application/json' }
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
                         })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.changePassword = function (lastPassword, password) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-password", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                password: password,
+                                lastPassword: lastPassword
+                            }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.changeTheme = function (theme) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-theme", {
+                            method: "POST",
+                            body: JSON.stringify({ theme: theme }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.accounts = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/accounts", {
+                            method: "POST",
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.deleteUser = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/delete-user", {
+                            method: "POST",
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.changeCurrentAccount = function (accountId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-current-account", {
+                            method: "POST",
+                            body: JSON.stringify({ accountId: accountId }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.changeUserName = function (newName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/change-name", {
+                            method: "POST",
+                            body: JSON.stringify({
+                                name: newName
+                            }),
+                            credentials: "include",
+                            headers: {
+                                "Content-Type": "application/json"
+                            }
+                        })];
+                    case 1:
+                        response = _a.sent();
+                        return [4 /*yield*/, response.json()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.updateAvatar = function (avatar, fileName) {
+        return __awaiter(this, void 0, void 0, function () {
+            var formData, response;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        formData = new FormData();
+                        formData.append("file", avatar, fileName);
+                        return [4 /*yield*/, fetch(process.env.NEXT_PUBLIC_BACKEND_API_URL + "/users/update-avatar", {
+                                method: "POST",
+                                body: formData,
+                                credentials: "include"
+                            })];
                     case 1:
                         response = _a.sent();
                         return [4 /*yield*/, response.json()];

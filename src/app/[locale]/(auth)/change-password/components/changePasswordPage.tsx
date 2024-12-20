@@ -31,12 +31,10 @@ const ChangePasswordPage: React.FC<{ isValid: boolean; token: string; params: an
 
 		setIsLoading(true);
 		try {
-			const data = await UserService.changePassword(password, token);
-			console.log(data)
+			const data = await UserService.changePasswordToken(password, token);
 			if(data.status !== 200) {
 				setMsgError(t("error_occurred"));
 			} else {
-				console.log("Password changed successfully");
 				router.push(`/${params.locale}/signin`);
 			}
 		} catch (error) {

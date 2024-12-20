@@ -21,7 +21,7 @@ export default  function Layout({
   };
 
 	return (
-		<div className="overflow-hidden container  mx-auto relative  min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+		<main className="bg-background text-accent-foreground overflow-hidden   mx-auto relative  min-h-screen flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0 dark">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0 bg-zinc-900" />
           <div className="relative z-20 flex items-center text-lg font-medium">
@@ -55,7 +55,7 @@ export default  function Layout({
             {children}
           </AnimatePresence>
         </div>
-		</div>
+		</main>
 	);
 };
 

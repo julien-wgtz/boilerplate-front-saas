@@ -1,24 +1,42 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
-import React from 'react';
+import { SidebarSaas } from "@/components/Sidebars/sidebar";
+import UserService from "@/services/users";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import React from "react";
 
-export default function Layout({
-	children,
-  }: Readonly<{
-	children: React.ReactNode;
-  }>) {
+export default async function Layout({
+  children,
+  params,
+}: Readonly<{
+  children: React.ReactNode;
+  params: { locale: string };
+}>) {
+  const sessionCookie = cookies().get(
+    "connect.sid"
+  );
+  if (!sessionCookie) {
+    redirect("/signin");
+  }
 
-	const sessionCookie = cookies().get('connect.sid');
+  const me = await UserService.me(sessionCookie);
+  if (me.statusCode == 403) {
+    redirect("/signin");
+  }
 
-	// Si la session n'est pas présente, rediriger vers /login
-	if (!sessionCookie) {
-	  redirect('/signin');
-	}
-
-	return (
-		<div>
-        	{children}
-		</div>
-	);
-};
-
+  return (
+    <main
+      className={`group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar ${me.theme}`}
+    >
+      <SidebarSaas
+        lang={params.locale}
+        userFetch={me}
+      >
+        {React.Children.map(children, (child) => {
+          return React.cloneElement(child, {
+            lang: params.locale,
+          });
+        })}
+      </SidebarSaas>
+    </main>
+  );
+}
